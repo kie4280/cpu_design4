@@ -26,7 +26,7 @@ void simulate(int cache_size, int block_size)
 
 	int offset_bit = (int)log2(block_size);
 	int index_bit = (int)log2(cache_size / block_size);
-	int line = cache_size >> (offset_bit);
+	int line = cache_size >> (offset_bit); // rows
 	int accesses = 0, miss = 0;
 
 	cache_content *cache = new cache_content[line];

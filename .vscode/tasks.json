@@ -4,7 +4,7 @@
         {
             "label": "build target",
             "type": "shell",
-            "command": "cd test && make all",
+            "command": "cd test && make advance",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
