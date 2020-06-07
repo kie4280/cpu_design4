@@ -1,0 +1,5 @@
+/build/**
+/source_code/verilog/*.vcd
+/source_code/verilog/*.vvp
+/out/**
+
