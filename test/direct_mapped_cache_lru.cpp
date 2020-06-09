@@ -29,14 +29,14 @@ void simulate(int cache_size, int block_size, int n_way) {
   int line = (cache_size >> offset_bit); // rows
   int accesses = 0, miss = 0;
 
-  cache_content **cache = new cache_content*[line-set_bit];
-  for (int a = 0; a < line-set_bit; ++a) {
+  cache_content **cache = new cache_content*[line>>set_bit];
+  for (int a = 0; a < line>>set_bit; ++a) {
     cache[a] = new cache_content[n_way];
   }
 
   // cout << "cache line: " << line << endl;
 
-  for (int j = 0; j < line-set_bit; j++) {
+  for (int j = 0; j < line>>set_bit; j++) {
     for (int i = 0; i < n_way; ++i) {
       cache[j][i].v = false;
     }
@@ -84,7 +84,7 @@ void simulate(int cache_size, int block_size, int n_way) {
 
   // cout <<dec<< miss << " " << accesses << endl;
   cout << (double)miss / accesses << endl;
-  for (int a = 0; a < line-set_bit; ++a) {
+  for (int a = 0; a < line>>set_bit; ++a) {
     delete[] cache[a];
   }
   delete[] cache;
@@ -92,9 +92,14 @@ void simulate(int cache_size, int block_size, int n_way) {
 
 int main() {
   // Let us simulate 4KB cache with 16B blocks
+  for(int b=0; b<4;++b) {
     for(int a=0; a<=6; ++a) {
-      simulate(128 * K, 64, 1<<a);
+      
+      simulate((4<<b*2) * K, 64, 1<<a);
     }
+    cout << "," << endl;
+  }
+    
     
   
 }
