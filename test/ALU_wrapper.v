@@ -93,7 +93,7 @@ always@(*) begin
 
         end
         SRAV: begin
-            result_o = shift_src >> src1_i;
+            result_o = shift_src >> src1_i[4:0];
 
         end
         SLL: begin
