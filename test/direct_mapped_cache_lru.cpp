@@ -58,7 +58,7 @@ void simulate(int cache_size, int block_size, int n_way) {
       if (b < n_way && cache[set_index][b].v &&
           cache[set_index][b].tag == tag) {
         cache[set_index][b].v = true;  // hit
-        cache[set_index][least_index].count = 0;
+        cache[set_index][b].count = 0;
         
         break;
       }
