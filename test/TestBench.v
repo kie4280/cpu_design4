@@ -1,3 +1,4 @@
+// Author: 0710012 何權祐, 0710018 張宸愷
 `timescale 1ns / 1ps
 `define	CYCLE_TIME 20
 

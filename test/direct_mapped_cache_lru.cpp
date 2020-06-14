@@ -1,3 +1,4 @@
+// Author: 0710012 何權祐, 0710018 張宸愷
 #include <math.h>
 #include <stdio.h>
 
@@ -42,7 +43,7 @@ void simulate(int cache_size, int block_size, int n_way) {
     }
   }
 
-  FILE *fp = fopen("test/RADIX.txt", "r");  // read file
+  FILE *fp = fopen("test/LU.txt", "r");  // read file
 
   while (fp != 0 && fscanf(fp, "%x", &x) != EOF) {
     // cout << hex << x << " ";
