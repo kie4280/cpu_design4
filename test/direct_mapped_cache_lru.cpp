@@ -36,47 +36,47 @@ void simulate(int cache_size, int block_size, int n_way) {
 
   // cout << "cache line: " << line << endl;
 
-  for (int j = 0; j<line>> set_bit; j++) {
+  for (int j = 0; j < (line >> set_bit); j++) {
     for (int i = 0; i < n_way; ++i) {
       cache[j][i].v = false;
     }
   }
 
-  FILE *fp = fopen("test/RADIX.txt", "r");  // read file
+  FILE *fp = fopen("test/LU.txt", "r");  // read file
 
   while (fp != 0 && fscanf(fp, "%x", &x) != EOF) {
     // cout << hex << x << " ";
-    index = (x >> offset_bit) & (line - 1);
-    tag = x >> (index_bit + offset_bit);
-    unsigned int set_index = index & ((line>>set_bit)-1);
+    index = (x >> (offset_bit)) & ((line - 1)>>set_bit);
+    tag = x >> (index_bit + offset_bit-set_bit);
+    
     // unsigned int set_index = index >> set_bit;
     
     unsigned int least_used = 0;
     int least_index = 0;
 
     for (int b = 0; b <= n_way; ++b) {
-      if (b < n_way && cache[set_index][b].v &&
-          cache[set_index][b].tag == tag) {
-        cache[set_index][b].v = true;  // hit
-        cache[set_index][b].count = 0;
+      if (b < n_way && cache[index][b].v &&
+          cache[index][b].tag == tag) {
+        cache[index][b].v = true;  // hit
+        cache[index][b].count = 0;
         
         break;
       }
 
       else if (b == n_way) {
         for (int j = 0; j < n_way; ++j) {
-          if(cache[set_index][j].v == false) {
+          if(cache[index][j].v == false) {
             least_index = j;
             break;
           }
-          if (least_used < cache[set_index][j].count) {
-            least_used = cache[set_index][j].count;
+          if (least_used < cache[index][j].count) {
+            least_used = cache[index][j].count;
             least_index = j;
           }
         }
-        cache[set_index][least_index].count = 0;
-        cache[set_index][least_index].v = true;
-        cache[set_index][least_index].tag = tag;
+        cache[index][least_index].count = 0;
+        cache[index][least_index].v = true;
+        cache[index][least_index].tag = tag;
         miss++;
       }
 
@@ -84,7 +84,7 @@ void simulate(int cache_size, int block_size, int n_way) {
     }
 
     for(int b=0; b<n_way; ++b) {
-      cache[set_index][b].count++;
+      cache[index][b].count++;
     }
     // cout <<dec<< miss << " " << accesses << endl;
     accesses++;
