@@ -1,3 +1,4 @@
+// Author: 0710012 何權祐, 0710018 張宸愷
 #include <iostream>
 #include <stdio.h>
 #include <math.h>
@@ -61,7 +62,7 @@ void simulate(int cache_size, int block_size)
 	}
 
 	// cout <<dec<< miss << " " << accesses << endl;
-	cout << (double)miss/accesses << endl;
+	cout << (double)miss/accesses;
 	
 
 	delete [] cache;
@@ -71,8 +72,14 @@ int main()
 {
 	// Let us simulate 4KB cache with 16B blocks
 	for(int a=0; a<5; ++a) {
-		simulate(256 * K, 16<<a);
+		for(int b=0; b<4; ++b) {
+			simulate((4<<(b*2)) * K, 16<<a);
+			cout << " ";
+		}
+		
+		cout << endl;
 	}
+	
 	
 	
 }

@@ -1,3 +1,4 @@
+// Author: 0710012 何權祐, 0710018 張宸愷
 module Data_Memory
 (
 	clk_i,
